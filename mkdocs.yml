@@ -103,6 +103,7 @@ nav:
   - Релізи:
       - Огляд: releases/index.md
       - Changelog MAIL-1 → MAIL-16: releases/mail-1-16.md
+      - Майбутній roadmap: releases/future-roadmap.md
       - MAIL-14 · Spintax: releases/mail-14.md
       - MAIL-15 · Logging: releases/mail-15.md
       - MAIL-16 · History Export: releases/mail-16.md
