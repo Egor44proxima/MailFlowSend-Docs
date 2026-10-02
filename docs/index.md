@@ -2,6 +2,12 @@
 
 **MailFlowSend** — desktop-застосунок для контрольованих email-розсилок, persistent Queue, SMTP submission, delivery evidence, DSN, історії відправок, діагностики та operational observability.
 
+## Актуальність документації
+
+<div id="docs-source-status"></div>
+
+Документація прив'язана до конкретного `MailFlowSend/main` SHA. Якщо application repository піде вперед, цей індикатор автоматично зміниться на **OUTDATED** до фактичного оновлення документації.
+
 ## Поточний accepted baseline
 
 ~~~text

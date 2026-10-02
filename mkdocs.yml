@@ -99,6 +99,7 @@ nav:
       - MAIL-16 · History Export: releases/mail-16.md
   - Довідник:
       - Статуси та інваріанти: reference/status-contracts.md
+      - Актуальність документації: reference/documentation-freshness.md
 
 markdown_extensions:
   - admonition
@@ -126,5 +127,8 @@ plugins:
 
 extra_css:
   - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/source-status.js
 
 copyright: "MailFlowSend Documentation · Public-safe technical reference"
