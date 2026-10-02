@@ -178,19 +178,62 @@ Excluded
 > У разі виникнення запитань просимо звернутися до вашого менеджера.  
 > З повагою, {csm_name}
 
-Підтримувані campaign variables можуть включати:
+## Опис тегів шаблону
+
+Для кампанії типу **DOCUMENTS** Core підтримує такі variables:
+
+| Тег | Що підставляється | Приклад |
+|---|---|---|
+| `{client_name}` | Canonical назва клієнта з картки **Клієнти** | `Клієнт A` |
+| `{client_email}` | Точна email-адреса recipient, для якого виконується Preview / freeze | `client@example.com` |
+| `{period}` | Назва місяця українською без року | `Вересень` |
+| `{period_code}` | Код періоду кампанії у форматі `YYYY-MM` | `2026-09` |
+| `{period_name}` | Назва місяця українською | `Вересень` |
+| `{period_year}` | Рік із campaign period | `2026` |
+| `{period_label}` | Готовий підпис періоду: назва місяця + рік | `Вересень 2026` |
+| `{csm_name}` | Ім'я/назва поточного canonical CSM клієнта | `CSM 1` |
+| `{csm_phone}` | Телефон поточного CSM | `+380...` |
+| `{csm_email}` | Email поточного CSM; для DOCUMENTS цей CSM є sender context | `csm@example.com` |
+
+### Різниця між period-тегами
+
+Якщо у кампанії заданий period:
 
 ~~~text
-{client_name}
-{period}
-{period_code}
-{period_name}
-{period_year}
-{period_label}
+2026-09
+~~~
+
+то результат буде:
+
+~~~text
+{period}       → Вересень
+{period_code}  → 2026-09
+{period_name}  → Вересень
+{period_year}  → 2026
+{period_label} → Вересень 2026
+~~~
+
+Тобто `{period}` і `{period_name}` у поточному DOCUMENTS contract дають однакове значення — **назву місяця**. Для тексту на кшталт «рахунок за Вересень 2026» зручніше використовувати `{period_label}`.
+
+### Приклад шаблону
+
+~~~text
+Тема:
+Рахунок за {period_label}
+
+Текст:
+Шановні партнери!
+
+Надсилаємо рахунок за {period_label}.
+Документ додається до цього листа.
+
+У разі виникнення запитань:
 {csm_name}
 {csm_phone}
 {csm_email}
 ~~~
+
+При Preview/Dispatch Freeze значення беруться з canonical campaign/client/CSM context. Якщо current recipient або sender context не проходить перевірки, Preflight/freeze має блокувати відправку, а не залишати невідомий тег у готовому листі.
 
 ## 11. Перевірити Preview
 
