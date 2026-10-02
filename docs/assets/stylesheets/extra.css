@@ -1,0 +1,4 @@
+.md-grid { max-width: 1500px; }
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li { border-radius: 0.6rem; }
+.md-typeset code { word-break: normal; }
