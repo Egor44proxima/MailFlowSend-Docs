@@ -14,6 +14,7 @@ theme:
     - navigation.sections
     - navigation.top
     - navigation.footer
+    - navigation.instant
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -37,14 +38,27 @@ nav:
       - Інсталяція та запуск: getting-started/installation.md
       - Перший запуск: getting-started/first-run.md
   - Посібник користувача:
-      - Робочі області: user-guide/index.md
-      - Клієнти: user-guide/clients.md
-      - Кампанії: user-guide/campaigns.md
-      - Черга: user-guide/queue.md
-      - Доставка: user-guide/delivery.md
-      - Історія та експорт: user-guide/history.md
-      - DSN: user-guide/dsn.md
-      - Діагностика: user-guide/diagnostics.md
+      - Карта робочих областей: user-guide/index.md
+      - 01 · Огляд: user-guide/overview.md
+      - 02 · Клієнти: user-guide/clients.md
+      - 03 · CSM: user-guide/csm.md
+      - 04 · Документи: user-guide/documents.md
+      - 05 · База розсилки: user-guide/mailing-base.md
+      - 06 · Кампанії: user-guide/campaigns.md
+      - 07 · Борг: user-guide/debt.md
+      - 08 · Черга: user-guide/queue.md
+      - 09 · Доставка: user-guide/delivery.md
+      - 10 · Недоставка: user-guide/non-delivery.md
+      - 11 · Історія: user-guide/history.md
+      - 12 · Аналітика: user-guide/analytics.md
+      - 13 · Моніторинг: user-guide/monitoring.md
+      - 14 · Вхідна пошта: user-guide/inbox.md
+      - 15 · DSN огляд: user-guide/dsn.md
+      - 16 · Діагностика: user-guide/diagnostics.md
+      - 17 · Системний журнал: user-guide/system-log.md
+      - 18 · Відновлення: user-guide/recovery.md
+      - 19 · Модулі: user-guide/modules.md
+      - 20 · Налаштування: user-guide/settings.md
   - Експлуатація:
       - Runtime режими: operations/runtime-modes.md
       - SMTP: operations/smtp.md
@@ -52,6 +66,10 @@ nav:
       - Відновлення та безпека: operations/recovery-safety.md
   - Архітектура:
       - Огляд: architecture/index.md
+      - Системний контекст: architecture/system-context.md
+      - Lifecycle від кампанії до History: architecture/send-lifecycle.md
+      - Delivery / DSN evidence: architecture/delivery-evidence.md
+      - Runtime та сховище: architecture/runtime-storage.md
       - Evidence модель: architecture/evidence-model.md
       - Дані та SQLite: architecture/data.md
       - Модулі: architecture/modules.md
@@ -75,7 +93,11 @@ markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:
