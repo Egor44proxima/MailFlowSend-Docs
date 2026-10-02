@@ -1,0 +1,93 @@
+site_name: MailFlowSend Documentation
+site_description: Публічна документація MailFlowSend — операторська робота, архітектура, експлуатація та релізи.
+site_author: MailFlowSend
+site_url: https://egor44proxima.github.io/MailFlowSend-Docs/
+repo_url: https://github.com/Egor44proxima/MailFlowSend-Docs
+repo_name: Egor44proxima/MailFlowSend-Docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: uk
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Темна тема
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Світла тема
+
+nav:
+  - Головна: index.md
+  - Початок роботи:
+      - Огляд: getting-started/index.md
+      - Інсталяція та запуск: getting-started/installation.md
+      - Перший запуск: getting-started/first-run.md
+  - Посібник користувача:
+      - Робочі області: user-guide/index.md
+      - Клієнти: user-guide/clients.md
+      - Кампанії: user-guide/campaigns.md
+      - Черга: user-guide/queue.md
+      - Доставка: user-guide/delivery.md
+      - Історія та експорт: user-guide/history.md
+      - DSN: user-guide/dsn.md
+      - Діагностика: user-guide/diagnostics.md
+  - Експлуатація:
+      - Runtime режими: operations/runtime-modes.md
+      - SMTP: operations/smtp.md
+      - Системний журнал: operations/logging.md
+      - Відновлення та безпека: operations/recovery-safety.md
+  - Архітектура:
+      - Огляд: architecture/index.md
+      - Evidence модель: architecture/evidence-model.md
+      - Дані та SQLite: architecture/data.md
+      - Модулі: architecture/modules.md
+  - Розробка:
+      - Середовище і збірка: development/build.md
+      - Acceptance workflow: development/acceptance.md
+      - Публічна документація: development/docs-policy.md
+  - Релізи:
+      - Огляд: releases/index.md
+      - MAIL-14 · Spintax: releases/mail-14.md
+      - MAIL-15 · Logging: releases/mail-15.md
+      - MAIL-16 · History Export: releases/mail-16.md
+  - Довідник:
+      - Статуси та інваріанти: reference/status-contracts.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+
+plugins:
+  - search:
+      lang:
+        - uk
+        - en
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+copyright: "MailFlowSend Documentation · Public-safe technical reference"
