@@ -73,6 +73,20 @@ nav:
       - Evidence модель: architecture/evidence-model.md
       - Дані та SQLite: architecture/data.md
       - Модулі: architecture/modules.md
+  - Developer Handbook:
+      - Огляд системи: developer-handbook/index.md
+      - Структура вихідного коду: developer-handbook/source-layout.md
+      - Startup & shutdown lifecycle: developer-handbook/startup-lifecycle.md
+      - CoreDB та SQLite schema: developer-handbook/coredb-schema.md
+      - Wails API: developer-handbook/wails-api.md
+      - Outbound mail flow: developer-handbook/outbound-mail.md
+      - Inbound / DSN flow: developer-handbook/inbound-dsn.md
+      - Runtime modules & workers: developer-handbook/modules-workers.md
+      - Logging & observability: developer-handbook/logging-observability.md
+      - Recovery architecture: developer-handbook/recovery.md
+      - Runtime security: developer-handbook/runtime-security.md
+      - Testing & CI: developer-handbook/testing-ci.md
+      - Dependency map: developer-handbook/dependency-map.md
   - Розробка:
       - Середовище і збірка: development/build.md
       - Acceptance workflow: development/acceptance.md
