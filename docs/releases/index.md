@@ -19,3 +19,10 @@ Migration  NONE
 ## Повна capability history
 
 Для наскрізного огляду розвитку системи від Core/client foundation до History Export див. [Capability Changelog · MAIL-1 → MAIL-16](mail-1-16.md).
+
+
+## Майбутній roadmap
+
+Заплановані, але ще не реалізовані напрями — portable production packaging, cross-platform/Linux runtime та Docker build/test infrastructure — зафіксовані окремо в [Future Roadmap](future-roadmap.md).
+
+Цей roadmap має статус **PLANNED / NOT STARTED** і не є частиною accepted application baseline.
