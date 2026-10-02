@@ -256,6 +256,8 @@ Frontend code should call these bindings asynchronously and must not reproduce C
 | PrepareBouncedRecipientResend | Mutation | Prepare Prepare Bounced Recipient Resend | export function PrepareBouncedRecipientResend(arg1:number):Promise&lt;coredb.BounceResendCreateResult&gt;; |
 | QueryDeliveryHistoryWorkspace | Read | Query Delivery History Workspace | export function QueryDeliveryHistoryWorkspace(arg1:coredb.DeliveryHistoryWorkspaceQuery):Promise&lt;coredb.DeliveryHistoryWorkspacePage&gt;; |
 
+| PreviewDocumentsCatchUp | Preview / advisory | Preview/validate without commit Documents Catch Up | export function PreviewDocumentsCatchUp(arg1:number):Promise&lt;coredb.DocumentsCatchUpPreview&gt;; |
+
 ## DSN
 
 | Method | Class | Semantic | Exact TypeScript signature |
@@ -333,19 +335,14 @@ Frontend code should call these bindings asynchronously and must not reproduce C
 | UpdateRecoveryBackupAutomation | Mutation | Update Recovery Backup Automation | export function UpdateRecoveryBackupAutomation(arg1:boolean,arg2:number,arg3:number,arg4:number):Promise&lt;recovery.BackupAutomationView&gt;; |
 | ValidateRecoveryBackup | Mutation | Validate Validate Recovery Backup | export function ValidateRecoveryBackup(arg1:string):Promise&lt;recovery.BackupValidation&gt;; |
 
+| ConfirmManagedBackupLifecycle | Mutation | Confirm Managed Backup Lifecycle | export function ConfirmManagedBackupLifecycle(arg1:string,arg2:string):Promise&lt;recovery.BackupLifecycleResult&gt;; |
+
 ## Legacy Import
 
 | Method | Class | Semantic | Exact TypeScript signature |
 |---|---|---|---|
 | ChooseLegacyProjectRoot | Desktop picker | Open desktop picker for Legacy Project Root | export function ChooseLegacyProjectRoot():Promise&lt;string&gt;; |
 | ImportLegacyProject | Mutation | Import Legacy Project | export function ImportLegacyProject(arg1:string):Promise&lt;legacyimport.FullImportResult&gt;; |
-
-## Other
-
-| Method | Class | Semantic | Exact TypeScript signature |
-|---|---|---|---|
-| ConfirmManagedBackupLifecycle | Mutation | Confirm Managed Backup Lifecycle | export function ConfirmManagedBackupLifecycle(arg1:string,arg2:string):Promise&lt;recovery.BackupLifecycleResult&gt;; |
-| PreviewDocumentsCatchUp | Preview / advisory | Preview/validate without commit Documents Catch Up | export function PreviewDocumentsCatchUp(arg1:number):Promise&lt;coredb.DocumentsCatchUpPreview&gt;; |
 
 ## Safety notes for high-risk API families
 

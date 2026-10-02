@@ -14,3 +14,8 @@ Schema     v53
 ABI        1
 Migration  NONE
 ~~~
+
+
+## Повна capability history
+
+Для наскрізного огляду розвитку системи від Core/client foundation до History Export див. [Capability Changelog · MAIL-1 → MAIL-16](mail-1-16.md).

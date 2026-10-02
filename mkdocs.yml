@@ -67,6 +67,8 @@ nav:
       - SMTP: operations/smtp.md
       - Retry / Catch-up / Resend: operations/send-recovery-runbooks.md
       - Inbound / DSN runbook: operations/inbound-dsn-runbook.md
+      - Troubleshooting: operations/troubleshooting.md
+      - Upgrade & Rollback: operations/upgrade-rollback.md
       - Системний журнал: operations/logging.md
       - Відновлення та безпека: operations/recovery-safety.md
   - Архітектура:
@@ -83,7 +85,9 @@ nav:
       - Структура вихідного коду: developer-handbook/source-layout.md
       - Startup & shutdown lifecycle: developer-handbook/startup-lifecycle.md
       - CoreDB та SQLite schema: developer-handbook/coredb-schema.md
+      - DB ERD / FK / Index Reference: developer-handbook/database-erd-reference.md
       - Wails API: developer-handbook/wails-api.md
+      - Wails Method Semantic Reference: developer-handbook/wails-method-reference.md
       - Outbound mail flow: developer-handbook/outbound-mail.md
       - Inbound / DSN flow: developer-handbook/inbound-dsn.md
       - Runtime modules & workers: developer-handbook/modules-workers.md
@@ -98,6 +102,7 @@ nav:
       - Публічна документація: development/docs-policy.md
   - Релізи:
       - Огляд: releases/index.md
+      - Changelog MAIL-1 → MAIL-16: releases/mail-1-16.md
       - MAIL-14 · Spintax: releases/mail-14.md
       - MAIL-15 · Logging: releases/mail-15.md
       - MAIL-16 · History Export: releases/mail-16.md
