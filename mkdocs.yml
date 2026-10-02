@@ -45,7 +45,9 @@ nav:
       - 04 · Документи: user-guide/documents.md
       - 05 · База розсилки: user-guide/mailing-base.md
       - 06 · Кампанії: user-guide/campaigns.md
-      - ▶ Перша розсилка рахунків: user-guide/first-documents-campaign.md
+      - ▶ Перша DOCUMENTS кампанія: user-guide/first-documents-campaign.md
+      - ▶ Перша DEBT_NOTICE кампанія: user-guide/first-debt-campaign.md
+      - ▶ Перша GENERAL кампанія: user-guide/first-general-campaign.md
       - 07 · Борг: user-guide/debt.md
       - 08 · Черга: user-guide/queue.md
       - 09 · Доставка: user-guide/delivery.md
@@ -63,6 +65,8 @@ nav:
   - Експлуатація:
       - Runtime режими: operations/runtime-modes.md
       - SMTP: operations/smtp.md
+      - Retry / Catch-up / Resend: operations/send-recovery-runbooks.md
+      - Inbound / DSN runbook: operations/inbound-dsn-runbook.md
       - Системний журнал: operations/logging.md
       - Відновлення та безпека: operations/recovery-safety.md
   - Архітектура:
@@ -99,6 +103,10 @@ nav:
       - MAIL-16 · History Export: releases/mail-16.md
   - Довідник:
       - Статуси та інваріанти: reference/status-contracts.md
+      - Повний Status / Error Reference: reference/status-error-reference.md
+      - Template Variables: reference/template-variables.md
+      - Формати імпорту: reference/import-formats.md
+      - SMTP Profile Reference: reference/smtp-profile-reference.md
       - Актуальність документації: reference/documentation-freshness.md
 
 markdown_extensions:
