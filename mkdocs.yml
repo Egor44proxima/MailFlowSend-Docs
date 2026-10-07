@@ -107,6 +107,7 @@ nav:
       - MAIL-14 · Spintax: releases/mail-14.md
       - MAIL-15 · Logging: releases/mail-15.md
       - MAIL-16 · History Export: releases/mail-16.md
+      - MAIL-UX-UA-1 · Ukrainian Operator UX: releases/mail-ux-ua-1.md
   - Довідник:
       - Статуси та інваріанти: reference/status-contracts.md
       - Повний Status / Error Reference: reference/status-error-reference.md
