@@ -68,6 +68,164 @@ Core зберігає тільки credential reference.
 
 Windows і Linux повинні використовувати однакові Core business rules, SQLite schema, Preflight, Dispatch, Queue, Retry, Delivery, DSN, History, Recovery semantics, Template engine і Logging contracts.
 
+# MAIL-9.6d · DOCUMENTS Late Attachment Catch-up Intelligence
+
+**Статус:** PLANNED / NOT STARTED
+
+Це найближче функціональне доповнення до вже прийнятого MAIL-9.6 DOCUMENTS Catch-up / Delta Dispatch.
+
+## Business scenario
+
+Primary monthly DOCUMENTS send виконується орієнтовно 10-го числа. Частина клієнтів може не мати required invoice PDF у monthly batch на момент primary send. Пізніше, наприклад 20-го, частина цих PDF з'являється.
+
+Потрібно визначити **тільки** клієнтів, які:
+
+~~~text
+були в primary monthly cohort
++
+primary blocker = missing DOCUMENTS PDF
++
+не мають SMTP_ACCEPTED send для period+batch+client
++
+не мають PENDING/UNKNOWN/pending Dispatch/pending catch-up
++
+зараз recipient READY/WARNING
++
+зараз required attachment READY/WARNING
+~~~
+
+і класифікувати їх як:
+
+~~~text
+LATE_ATTACHMENT_READY
+~~~
+
+Цей статус навмисно вужчий за загальний MAIL-9.6 NEWLY_READY.
+
+## Important decision
+
+Не hard-code calendar day 10 у Core.
+
+Authoritative primary boundary:
+
+~~~text
+Primary Eligibility evidence
++
+Primary Dispatch / Primary Send Day
+~~~
+
+Тому primary send може фактично відбутися 10-го, 11-го або іншого operational day без зміни business identity.
+
+## Operator tool
+
+Планується focused panel:
+
+~~~text
+ДОСИЛКА РАХУНКІВ · <period>
+
+Sent primary
+Missing PDF at primary
+Late attachment ready
+Still missing
+Review required
+~~~
+
+Таблиця повинна показувати client, CSM, email, primary attachment reason/state, current attachment state, filename(s), previous submission evidence, delta status і reason.
+
+## Catch-up creation
+
+Explicit action:
+
+~~~text
+Create late-attachment catch-up draft for N clients
+~~~
+
+Creation boundary повторно перевіряє eligibility у транзакції та включає тільки LATE_ATTACHMENT_READY.
+
+Вона створює лише DOCUMENTS DRAFT і **не** створює Dispatch/Queue та **не** викликає SMTP.
+
+Далі використовується canonical:
+
+~~~text
+Preflight
+→ Dispatch
+→ Handoff
+→ Queue
+→ SMTP
+~~~
+
+## Duplicate safety
+
+~~~text
+SMTP_ACCEPTED       → ALREADY_SENT
+PENDING / UNKNOWN   → REVIEW_REQUIRED
+pending Dispatch    → REVIEW_REQUIRED
+pending catch-up    → REVIEW_REQUIRED
+BOUNCED after ACCEPTED → Controlled Resend
+~~~
+
+~~~text
+Retry != Catch-up
+Catch-up != Controlled Resend
+SMTP_ACCEPTED != DELIVERED
+UNKNOWN != FAILED
+~~~
+
+## Missing-invoice report/export
+
+Планується read-only список primary missing-PDF cohort з current state.
+
+Preferred formats:
+
+~~~text
+CSV
+XLSX
+~~~
+
+Цей список можна передати бухгалтерії/operations після primary send, а пізніше оновити для контролю того, які рахунки вже з'явилися.
+
+## Expected workflow
+
+~~~text
+primary day
+index monthly folder
+→ matcher/reconciliation
+→ primary Preflight
+→ send READY cohort
+→ preserve missing-PDF evidence
+
+later
+new PDFs appear
+→ re-index same batch
+→ matcher/reconciliation
+→ refresh late-attachment delta
+→ LATE_ATTACHMENT_READY
+→ create catch-up DRAFT
+→ normal send pipeline
+~~~
+
+## Storage decision
+
+Preferred implementation: **migration-free**.
+
+Existing accepted evidence already contains immutable primary eligibility, attachment status/issues, period/batch/client identity, current attachment readiness, Delivery evidence and catch-up lineage.
+
+Не створювати дублюючу таблицю типу missing_on_day_10 без доказаного evidence gap.
+
+## Acceptance
+
+Targeted acceptance має покривати missing→ready, still missing, already accepted, pending/unknown, pending Dispatch/catch-up, email-only former blocker exclusion, bounced-after-accepted separation, stale-preview revalidation, no Queue/SMTP side effects, read-only export і historical immutability.
+
+Planning estimate:
+
+~~~text
+2.5–4.5 working days
+~~~
+
+Private engineering tracker: **MailFlowSend issue #12**.
+
+---
+
 # MAIL-17 · Portable Production Packaging & Release Management
 
 **Статус:** PLANNED
