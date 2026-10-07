@@ -1,10 +1,10 @@
 {
   "source_repository": "Egor44proxima/MailFlowSend",
   "source_branch": "main",
-  "documented_source_sha": "0aae214a2e6324b09b4ad1b093fae174abc5ebb0",
+  "documented_source_sha": "5b736c069a75b93bd14d7e69c94b53af58aa12fd",
   "core": "0.16.9",
   "schema": "v53",
   "abi": "1",
   "migration": "NONE",
-  "documented_at": "2026-10-02"
+  "documented_at": "2026-10-07"
 }

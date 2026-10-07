@@ -72,6 +72,37 @@ BLOCKED recipient не повинен потрапити у send лише чер
 
 Після freeze campaign content/recipient evidence стає source для Queue. Подальші зміни client contact, template або runtime Spintax preference не переписують frozen payload.
 
+## Late Attachment Catch-up для DOCUMENTS
+
+MAIL-9.6d додає focused panel **«Пізно готові рахунки»** для monthly DOCUMENTS campaign.
+
+Він відповідає на вузьке питання:
+
+> Які клієнти були заблоковані саме через відсутній required PDF на primary boundary, але тепер мають READY attachment?
+
+Основний status:
+
+~~~text
+LATE_ATTACHMENT_READY
+~~~
+
+Primary boundary визначається immutable evidence, а не hard-coded календарним днем:
+
+~~~text
+Primary Eligibility
++ Primary Dispatch
++ Primary Send Day
+~~~
+
+Оператор може:
+
+1. оновити late-attachment projection;
+2. перевірити Missing at primary / Late ready / Still missing / Already sent / Review;
+3. експортувати missing-at-primary cohort у CSV або XLSX;
+4. явно створити catch-up DRAFT тільки для `LATE_ATTACHMENT_READY`.
+
+Create action не створює Dispatch або Queue і не запускає SMTP. Новий DRAFT проходить звичайний MAIL-5 Preflight.
+
 ## Типовий сценарій
 
 1. Створити draft правильного type.
@@ -90,6 +121,8 @@ BLOCKED recipient не повинен потрапити у send лише чер
 - UI preview ≠ frozen payload.
 - BLOCKED ≠ READY.
 - Retry ≠ controlled resend.
+- Catch-up ≠ controlled resend.
+- `LATE_ATTACHMENT_READY` не обходить MAIL-5 Preflight.
 - Campaign type isolation не повинна обходитися вручну.
 
 ## Пов'язані workspace

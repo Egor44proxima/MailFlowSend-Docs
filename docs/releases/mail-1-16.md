@@ -139,6 +139,8 @@ v51 identity_aware_queue_smtp_sidecar
 v52 identity_retry_dsn_history_sidecars
 ~~~
 
+MAIL-9.6d adds migration-free **Late Attachment Catch-up Intelligence** for monthly DOCUMENTS: immutable primary missing-PDF evidence, `LATE_ATTACHMENT_READY`, duplicate-safe legacy + identity-aware guards, read-only CSV/XLSX missing-at-primary export, and explicit DRAFT-only catch-up creation through the normal MAIL-5 path.
+
 Legacy evidence was retained rather than rewritten.
 
 ## MAIL-10 · Diagnostic Center

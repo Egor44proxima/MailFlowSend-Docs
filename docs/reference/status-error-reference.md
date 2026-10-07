@@ -178,9 +178,37 @@ REVIEW_REQUIRED
 SOURCE_EXCLUDED
 ~~~
 
-Only NEWLY_READY is auto-included into a newly created catch-up DRAFT.
+Only NEWLY_READY is auto-included into a newly created general catch-up DRAFT.
 
 A prior SMTP_ACCEPTED recipient is ALREADY_SENT even if later Delivery becomes BOUNCED; bounce requires Controlled Resend, not Catch-up.
+
+## DOCUMENTS Late Attachment Catch-up
+
+MAIL-9.6d uses a narrower primary-missing-PDF projection:
+
+~~~text
+ALREADY_SENT
+LATE_ATTACHMENT_READY
+STILL_MISSING
+BLOCKED
+REVIEW_REQUIRED
+SOURCE_EXCLUDED
+NOT_PRIMARY_MISSING_PDF
+~~~
+
+`LATE_ATTACHMENT_READY` means immutable primary eligibility proves the required DOCUMENTS PDF was missing at the primary boundary and the same period/batch/client is currently ready with no duplicate-send blocker.
+
+Only `LATE_ATTACHMENT_READY` is included by the dedicated create action.
+
+~~~text
+LATE_ATTACHMENT_READY
+→ DOCUMENTS DRAFT only
+→ normal MAIL-5 Preflight
+→ explicit Dispatch
+→ explicit Queue
+~~~
+
+Preview/create does not automatically create Dispatch, Queue, Retry or SMTP work.
 
 ## Controlled Bounce Resend
 
@@ -305,6 +333,7 @@ BOUNCED != DORMANT
 DORMANT != STOPPED
 Coverage != Delivery
 Retry != controlled resend
+Catch-up != controlled resend
 History is read-only evidence
 legacy evidence is not rewritten
 identity-aware evidence remains identity-aware

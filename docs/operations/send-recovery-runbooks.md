@@ -79,7 +79,7 @@ REVIEW_REQUIRED
 SOURCE_EXCLUDED
 ~~~
 
-Тільки NEWLY_READY автоматично включається в новий catch-up DRAFT.
+Тільки NEWLY_READY автоматично включається в новий general catch-up DRAFT.
 
 ### Правильний flow
 
@@ -95,6 +95,63 @@ root DOCUMENTS campaign
 ~~~
 
 Catch-up creation не відправляє лист і не створює Queue.
+
+### 3.1 Late Attachment Catch-up · MAIL-9.6d
+
+MAIL-9.6d додає вузький monthly DOCUMENTS flow для випадку, коли required PDF був відсутній саме на immutable primary boundary, але з'явився пізніше в тому самому period + batch.
+
+Canonical primary boundary:
+
+~~~text
+Primary Eligibility evidence
++ Primary Dispatch
++ Primary Send Day
+~~~
+
+Calendar day не hard-code'иться.
+
+Dedicated status:
+
+~~~text
+LATE_ATTACHMENT_READY
+~~~
+
+Він дозволений тільки коли:
+
+- primary evidence підтверджує missing required DOCUMENTS PDF;
+- current recipient/sender readiness проходить;
+- current required PDF уже READY;
+- немає prior SMTP_ACCEPTED для того самого period + batch + canonical client;
+- немає PENDING / UNKNOWN logical send;
+- немає pending frozen Dispatch;
+- client не staged в іншому unfinished catch-up.
+
+Email-only former blocker не створює `LATE_ATTACHMENT_READY`.
+
+Focused operator view показує:
+
+~~~text
+Missing at primary
+Late ready
+Still missing
+Already sent
+Review
+~~~
+
+І підтримує read-only CSV/XLSX export missing-at-primary cohort.
+
+Create action формує тільки новий DOCUMENTS DRAFT:
+
+~~~text
+LATE_ATTACHMENT_READY
+→ Create late-attachment catch-up
+→ DOCUMENTS DRAFT
+→ normal MAIL-5 Preflight
+→ explicit Dispatch
+→ explicit Queue
+~~~
+
+Автоматичний Dispatch, Queue, Retry або SMTP під час preview/create заборонені.
 
 ### Duplicate prevention
 
@@ -159,6 +216,7 @@ Resend зберігає source Delivery record, root Delivery record, generation
 | FAILED_PERMANENT | fix config/data; new valid flow if needed |
 | DELIVERY_UNKNOWN | operator review |
 | DOCUMENTS recipient had no prior accepted send and now READY | Catch-up |
+| Required DOCUMENTS PDF was missing at primary and is READY now | Late Attachment Catch-up |
 | SMTP_ACCEPTED then BOUNCED | Controlled Resend |
 | SMTP_ACCEPTED, no bounce | no duplicate resend |
 | current email changed after historical bounce | Controlled Resend preview + new DRAFT |
@@ -169,6 +227,7 @@ Resend зберігає source Delivery record, root Delivery record, generation
 ~~~text
 Retry != Controlled Resend
 Catch-up != Resend
+Late Attachment Catch-up != Controlled Resend
 SMTP_ACCEPTED != DELIVERED
 UNKNOWN != FAILED
 ~~~
